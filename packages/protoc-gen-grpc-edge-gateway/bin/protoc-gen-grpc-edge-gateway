@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+const { runNodeJs } = require('@bufbuild/protoplugin');
+const { protocGenGrpcEdgeway } = require('../dist/src/protoc-gen-grpc-edge-gateway-plugin.js');
+
+runNodeJs(protocGenGrpcEdgeway);

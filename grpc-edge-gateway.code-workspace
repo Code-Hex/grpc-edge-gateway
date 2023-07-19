@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "project-root",
+      "path": "./"
+    },
+    {
+      "name": "core",
+      "path": "packages/core"
+    },
+    {
+      "name": "protoc-gen-grpc-edge-gateway",
+      "path": "packages/protoc-gen-grpc-edge-gateway"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "packages/core/": true,
+      "packages/protoc-gen-grpc-edge-gateway/": true
+    }
+  }
+}

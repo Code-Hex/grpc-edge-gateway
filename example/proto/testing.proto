@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package testing;
+
+option go_package = "github.com/Code-Hex/testing-grpc/internal/testing;testing";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+service Status {
+  rpc Get(StatusGetRequest) returns (StatusGetResponse) {
+    option (google.api.http) = {
+      post: "/status/{code}"
+      body: "*"
+    };
+  };
+}
+
+message StatusGetRequest {
+  enum Code {
+    OK = 0;
+    CANCELED = 1;
+    UNKNOWN = 2;
+    INVALIDARGUMENT = 3;
+    DEADLINE_EXCEEDED = 4;
+    NOT_FOUND = 5;
+    ALREADY_EXISTS = 6;
+    PERMISSION_DENIED = 7;
+    RESOURCE_EXHAUSTED = 8;
+    FAILED_PRECONDITION = 9;
+    ABORTED = 10;
+    OUT_OF_RANGE = 11;
+    UNIMPLEMENTED = 12;
+    INTERNAL = 13;
+    UNAVAILABLE = 14;
+    DATALOSS = 15;
+    UNAUTHENTICATED = 16;
+  }
+  Code code = 1;
+}
+
+message StatusGetResponse {
+  string msg = 1;
+}
+
+service Detail {
+  rpc Get(DetailGetRequest) returns (DetailGetResponse) {
+    option (google.api.http) = {
+      post: "/detail/code"
+      body: "*"
+    };
+  };
+}
+
+message DetailGetRequest {
+  enum Code {
+    OK = 0;
+    RETRY_INFO = 1;
+    DEBUG_INFO = 2;
+    QUOTA_FAILURE = 3;
+    ERROR_INFO = 4;
+    PRECONDITION_FAILURE = 5;
+    BAD_REQUEST = 6;
+    REQUEST_INFO = 7;
+    RESOURCE_INFO = 8;
+    HELP = 9;
+    LOCALIZED_MESSAGE = 10;
+    COMBINED_ALL = 20;
+  }
+  Code code = 1;
+}
+
+message DetailGetResponse {
+  string msg = 1;
+}
+
+service Metadata {
+  rpc Get(google.protobuf.Empty) returns (MetadataGetResponse);
+}
+
+message MetadataGetResponse {
+  message Entry {
+    string key = 1;
+    repeated string value = 2;
+  }
+  repeated Entry metadata = 1;
+}
+
+service ChangeHealth {
+  rpc Set(SetRequest) returns (google.protobuf.Empty);
+}
+
+message SetRequest {
+  enum HealthCheckStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+    SERVICE_UNKNOWN = 3;
+  }
+  HealthCheckStatus status = 1;
+}
+
+service Interceptor {
+  rpc Echo(EchoRequest) returns (EchoResponse);
+}
+
+message EchoRequest {
+  string msg = 1;
+}
+
+message EchoResponse {
+  string msg = 1;
+}

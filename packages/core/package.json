@@ -1,0 +1,38 @@
+{
+  "name": "@grpc-edge-gateway/core",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "grpc-edge-gateway",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Code-Hex/grpc-edge-gateway.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
+    "build": "npm run build:cjs && npm run build:esm+types",
+    "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
+    "build:esm+types": "tsc --project tsconfig.json --module ES2015 --verbatimModuleSyntax --outDir ./dist/esm --declaration --declarationDir ./dist/types",
+    "generate": "buf generate proto"
+  },
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "devDependencies": {
+    "@bufbuild/connect": "^0.11.0",
+    "@bufbuild/protoc-gen-connect-es": "^0.11.0",
+    "@types/jest": "^29.5.3",
+    "jest": "^29.6.1",
+    "jest-environment-miniflare": "^2.14.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  }
+}

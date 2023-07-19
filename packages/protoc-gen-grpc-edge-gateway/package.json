@@ -1,0 +1,32 @@
+{
+  "name": "@grpc-edge-gateway/protoc-gen-grpc-edge-gateway",
+  "version": "0.0.1",
+  "description": "Protocol Buffers code generator for grpc edgeway",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Code-Hex/grpc-edge-gateway.git"
+  },
+  "bin": {
+    "protoc-gen-grpc-edge-gateway": "bin/protoc-gen-grpc-edge-gateway"
+  },
+  "files": [
+    "dist/**",
+    "bin/**"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc --module commonjs",
+    "generate": "buf generate proto"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^1.2.1",
+    "@bufbuild/protoplugin": "1.2.1",
+    "@grpc-edge-gateway/core": "workspace:^"
+  },
+  "devDependencies": {
+    "@bufbuild/protoc-gen-es": "^1.2.1"
+  }
+}
